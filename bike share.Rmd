@@ -1,0 +1,256 @@
+---
+title: "Cyclistic Bike-Share Analysis Case Study"
+author: "Timothy Park"
+output: html_document
+date: "2023-12-24"
+---
+![Cyclistic](https://media.licdn.com/dms/image/C5612AQF4GVhtwhZRIQ/article-cover_image-shrink_423_752/0/1644838905503?e=1709769600&v=beta&t=T9l5y3gTGmxToPHlkWW4lKClOIn2h7CenGOfdv4FZ9k)
+
+```{r setup, include=FALSE}
+chooseCRANmirror(graphics=FALSE, ind=1)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Background
+
+This case study demonstrates the implementation of the data analysis process: _ask, prepare, process, analyze, share and act_.  **Cyclistic** is a bike-share company in Chicago and the success of the company hinges on maximizing the number of annual memberships vs. casual ridership.  The goal is to convert casual riders to become annual members.
+
+## Ask
+
+Question: How do annual members and casual riders use Cyclistic bikes differently?
+
+## Prepare
+Install and load `tidyverse` (helps wrangle data), `lubridate` (helps wrangle date attributes) and `ggplot2` (helps visualize data).  We then display the working directory and set it to simplify calls to data and load the data to 4 data frames:
+
+* q2_2019
+* q3_2019
+* q4_2019
+* q1_2020
+
+```{r prepare}
+install.packages('tidyverse') 
+library('tidyverse')
+install.packages('lubridate')
+library('lubridate')
+install.packages('ggplot2')
+library('ggplot2')
+install.packages('janitor')
+library('janitor')
+install.packages('skimr')
+library('skimr')
+getwd() #displays your working directory
+setwd("~/Documents/GCC Data Analytics/Case Study 1 - bike share")
+
+q2_2019 <- read_csv("Divvy_Trips_2019_Q2.csv")
+q3_2019 <- read_csv("Divvy_Trips_2019_Q3.csv")
+q4_2019 <- read_csv("Divvy_Trips_2019_Q4.csv")
+q1_2020 <- read_csv("Divvy_Trips_2020_Q1.csv")
+```
+
+We want the column names to match so we use the colnames function to see which names don't align.  We want to make them consistent so we go with the *q1_2020* data frame as our template and we rename the columns for the other data frames.  After that we convert *ride_id* and *rideable_type* to character so that they can stack correctly using the mutate function.  In *q1_2020*, ride_id and rideable_type are in character format.  Finally we create one large data frame called all_trips by binding the rows of all 4 previous data frames.  Using the select function we filter out the columns that are not necessary for analysis.
+```{r prepare_v2}
+colnames(q3_2019)
+colnames(q4_2019)
+colnames(q2_2019)
+colnames(q1_2020)
+
+(q4_2019 <- rename(q4_2019
+                   ,ride_id = trip_id
+                   ,rideable_type = bikeid 
+                   ,started_at = start_time  
+                   ,ended_at = end_time  
+                   ,start_station_name = from_station_name 
+                   ,start_station_id = from_station_id 
+                   ,end_station_name = to_station_name 
+                   ,end_station_id = to_station_id 
+                   ,member_casual = usertype))
+
+(q3_2019 <- rename(q3_2019
+                   ,ride_id = trip_id
+                   ,rideable_type = bikeid 
+                   ,started_at = start_time  
+                   ,ended_at = end_time  
+                   ,start_station_name = from_station_name 
+                   ,start_station_id = from_station_id 
+                   ,end_station_name = to_station_name 
+                   ,end_station_id = to_station_id 
+                   ,member_casual = usertype))
+
+(q2_2019 <- rename(q2_2019
+                   ,ride_id = "01 - Rental Details Rental ID"
+                   ,rideable_type = "01 - Rental Details Bike ID" 
+                   ,started_at = "01 - Rental Details Local Start Time"  
+                   ,ended_at = "01 - Rental Details Local End Time"  
+                   ,start_station_name = "03 - Rental Start Station Name" 
+                   ,start_station_id = "03 - Rental Start Station ID"
+                   ,end_station_name = "02 - Rental End Station Name" 
+                   ,end_station_id = "02 - Rental End Station ID"
+                   ,member_casual = "User Type"))
+
+str(q1_2020)
+str(q4_2019)
+str(q3_2019)
+str(q2_2019)
+
+q4_2019 <-  mutate(q4_2019, ride_id = as.character(ride_id)
+                   ,rideable_type = as.character(rideable_type)) 
+q3_2019 <-  mutate(q3_2019, ride_id = as.character(ride_id)
+                   ,rideable_type = as.character(rideable_type)) 
+q2_2019 <-  mutate(q2_2019, ride_id = as.character(ride_id)
+                   ,rideable_type = as.character(rideable_type)) 
+
+all_trips <- bind_rows(q2_2019, q3_2019, q4_2019, q1_2020)
+
+all_trips <- all_trips %>%  
+  select(-c(start_lat, start_lng, end_lat, end_lng, birthyear, gender, "01 - Rental Details Duration In Seconds Uncapped", "05 - Member Details Member Birthday Year", "Member Gender", "tripduration"))
+
+
+```
+
+## Process
+We use different functions to inspect the new data frame that we created.  We notice there are two different names that refer to the same category - there is member and subscriber and customer and casual.  We will decide to keep it member and casual.  Using the table function, we double check to ensure the proper number of observations were reassigned and using the mutate function we create this new variable *member_casual*.  
+```{r process}
+nrow(all_trips)  
+dim(all_trips)  
+head(all_trips)  
+summary(all_trips)  
+skim_without_charts(all_trips)
+
+table(all_trips$member_casual)
+
+all_trips <-  all_trips %>% 
+  mutate(member_casual = recode(member_casual,"Subscriber" = "member","Customer" = "casual"))
+
+table(all_trips$member_casual)
+```
+
+We add columns that allow us to list the date, month, day and year of each ride.  Then we perform the `difftime` function to create a new variable *ride_length* that will give us the duration of the ride.  The variable is a Factor so we change it to numeric.  Then we will remove all variables that are unnecessary in our analysis by assigning a new data frame by using the `!` function.  These are ride lengths less than 0 and stations where bikes were taken out of circulation.
+```{r ride_length}
+all_trips$date <- as.Date(all_trips$started_at)
+all_trips$month <- format(as.Date(all_trips$date), "%m")
+all_trips$day <- format(as.Date(all_trips$date), "%d")
+all_trips$year <- format(as.Date(all_trips$date), "%Y")
+all_trips$day_of_week <- format(as.Date(all_trips$date), "%A")
+
+all_trips$ride_length <- difftime(all_trips$ended_at,all_trips$started_at)
+
+glimpse(all_trips)
+
+is.factor(all_trips$ride_length)
+all_trips$ride_length <- as.numeric(as.character(all_trips$ride_length))
+is.numeric(all_trips$ride_length)
+
+all_trips_v2 <- all_trips[!(all_trips$start_station_name == "HQ QR" | all_trips$ride_length<0),]
+
+View(all_trips_v2)
+```
+
+We can continue to demonstrate modifying the data frame by using the rename, rename_with, and clean_names functions. The rename function renames the column, the rename_with can affect change on all rows within a column and clean_names ensures column names are unique and consistent.
+
+```{r}
+all_trips_v2 %>%
+  rename(RIDE_ID = ride_id)
+
+rename_with(all_trips_v2, tolower)
+
+clean_names(all_trips_v2)
+```
+
+## Analyze
+We conduct a summary analysis on the ride length's average, midpoint, longest ride, and shortest ride in seconds, as well as demonstrating the summary function to show all four calculations.
+```{r}
+mean(all_trips_v2$ride_length)
+median(all_trips_v2$ride_length)
+max(all_trips_v2$ride_length)
+min(all_trips_v2$ride_length)
+
+summary(all_trips_v2$ride_length)
+```
+
+We utilize the aggregate function to compare members and casual users and find the average ride time by each day.
+```{r}
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = mean)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = median)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = max)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = min)
+
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual + all_trips_v2$day_of_week, FUN = mean)
+```
+
+Notice that the days of the week are out of order. To fix that we use the ordered() function and once again run the aggregate function.
+```{r}
+all_trips_v2$day_of_week <- ordered(all_trips_v2$day_of_week, levels=c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
+
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual + all_trips_v2$day_of_week, FUN = mean)
+
+```
+
+## Share
+We create a plot where the x axis are weekdays and the y axis are number of rides. The mutate() function gets us the weekday column. 
+```{r Number of Rides, message=FALSE, warning=FALSE}
+all_trips_v2 %>% 
+  mutate(weekday = wday(started_at, label = TRUE)) %>% 
+  group_by(member_casual, weekday) %>% 
+  summarise(number_of_rides = n(),average_duration = mean(ride_length)) %>% 
+  arrange(member_casual, weekday)  %>% 
+  ggplot(aes(x = weekday, y = number_of_rides, fill = member_casual)) +
+  geom_col(color='papayawhip',position = "dodge") +	
+  labs(title="Bike Share: Weekday vs. Number of Rides", 
+       subtitle=paste0("Data from: ", min(all_trips_v2$started_at), " to ", max(all_trips_v2$started_at)),
+       x = "Weekday",
+       y = "Number of Rides")
+```
+
+We create a plot that demonstrates average duration
+```{r Average Duration, message=FALSE, warning=FALSE}
+all_trips_v2 %>% 
+  mutate(weekday = wday(started_at, label = TRUE)) %>% 
+  group_by(member_casual, weekday) %>%
+  summarise(number_of_rides = n(),average_duration = mean(ride_length)) %>% 
+  arrange(member_casual, weekday)  %>% 
+  ggplot(aes(x = weekday, y = average_duration, fill = member_casual)) +
+  geom_col(color='steelblue3',position = "dodge") +	
+  labs(title="Bike Share: Weekday vs. Average Duration")
+```
+
+We create a plot for stations with number of rides greater than 35,000 which result in five stations
+```{r Top Five Stations, message=FALSE, warning=FALSE}
+all_trips_v2 %>% 
+  group_by(member_casual, start_station_name) %>%
+  summarise(number_of_rides = n(),average_duration = mean(ride_length)) %>% 
+  filter(number_of_rides > 35000) %>%
+  ggplot(aes(x = start_station_name, y = number_of_rides, fill = member_casual)) +
+  geom_col(color='red',position = "dodge") +	#preserves the vertical position of a geom
+  labs(title="Bike Share: Top 5 Start Station Name vs. Number of Rides") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+Usage by time of day was solved with the help of another person's code found here but could not figure out how to turn it into hours minutes seconds - (in progress) [link](https://stackoverflow.com/questions/73858624/datetime-data-in-r-ggplot2-how-to-create-x-axis-breaks-by-hour)
+```{r Usage by Time of Day, message=FALSE, warning=FALSE}
+all_trips_v2[,3:4] <- lapply(all_trips_v2[,3:4], function(z) as.POSIXct(paste("0001-01-01", substring(z, 12))))
+all_trips_v2 %>% 
+  ggplot(mapping = aes(x = started_at)) +
+  geom_histogram(bins = 24, color = "white", fill = "blue") +
+  labs(
+    title = "Usage by time of day",
+    subtitle = "Members vs. Casual Users",
+    x = "Ride Start Time",
+    y = "Ride Count",
+    caption = "Code used from stack overflow") +
+  #annotate("text", x = 20, y = 150000, label = "Hello", color = "purple", fontface = "bold", size = 4.5, angle = 25) +
+  facet_wrap(~ member_casual) +
+  scale_y_continuous(labels = scales::label_comma()) +
+  scale_x_datetime(
+    date_minor_breaks = "1 hour", date_breaks = "2 hours",
+    date_labels = "%H:%M") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 0.5))
+```
+
+## Act
+Based on the analysis the final conclusion is that casual riders ride far more often on the weekdays compared to the weekends. A potential use for Cyclistic would be that citizens use it for commuting purposes. Additionally, the average duration per ride for a casual rider more than doubles the amount compared to a member. Also, I was able to find the top 5 most popular stations in which there were 3 stations that members used the most, and 2 stations that casual riders used the most.  
+
+Based on the analysis I recommend that:
+
+1. Market more favorably at the top 5 most popular stations
+2. Limit the ride duration for casual riders to incentive switch to membership
+3. Conduct further analysis to see how to incentivize commuters to use Cyclistic
