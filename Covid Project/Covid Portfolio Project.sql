@@ -1,71 +1,80 @@
-Select *
-From PortfolioProject..CovidDeaths
-Where continent is not null
-order by 3,4
+SELECT *
+FROM PortfolioProject..CovidDeaths
+WHERE continent IS NOT NULL
+ORDER BY 3,4
 
-/* Select *
-From PortfolioProject..CovidVaccinations
-order by 3,4 */
+/* SELECT *
+FROM PortfolioProject..CovidVaccinations
+ORDER BY 3,4 */
 
--- Select Data that we are going to be using
+-- SELECT Data that we are going to be using
 
-Select location, date, total_cases, new_cases, total_deaths, population
-From PortfolioProject..CovidDeaths
-Where continent is not null
-order by 1,2
+SELECT location, date, total_cases, new_cases, total_deaths, population
+FROM PortfolioProject..CovidDeaths
+WHERE continent IS NOT NULL
+ORDER BY 1,2
 
 -- Looking at Total Cases vs. Total Deaths
 -- Shows likelihood of dying if you contract covid in your country
-Select location, date, total_cases, total_deaths, (CAST(total_deaths AS float)/CAST(total_cases AS float))*100 as DeathPercentage
-From PortfolioProject..CovidDeaths
-Where location like '%states%' AND
-    continent is not null
-order by 1,2
+SELECT location, date, total_cases, total_deaths, (CAST(total_deaths AS float)/CAST(total_cases AS float))*100 as DeathPercentage
+FROM PortfolioProject..CovidDeaths
+WHERE location like '%states%' AND
+    continent IS NOT NULL
+ORDER BY 1,2
 
 -- Looking at Total Cases vs Population
 -- Shows what percentage of population got Covid
 
-Select location, date, population, total_cases, (CAST(total_cases AS float)/CAST(population AS float))*100 as PercentPopulationInfected
-From PortfolioProject..CovidDeaths
-Where location like '%states%' AND
-    continent is not null
-order by 1,2
+SELECT location, date, population, total_cases, (CAST(total_cases AS float)/CAST(population AS float))*100 AS PercentPopulationInfected
+FROM PortfolioProject..CovidDeaths
+WHERE location like '%states%' AND
+    continent IS NOT NULL
+ORDER BY 1,2
 
 -- Looking at Countries with Highest Infection Rate compared to Population
 
-Select location, population, MAX(total_cases) as HighestInfectionCount, MAX(CAST(total_cases AS float)/CAST(population AS float))*100 as PercentPopulationInfected
-From PortfolioProject..CovidDeaths
-Where continent is not null
---Where location like '%states%'
-Group by location, population
-order by PercentPopulationInfected desc
+SELECT location, population, MAX(total_cases) AS HighestInfectionCount, MAX(CAST(total_cases AS float)/CAST(population AS float))*100 AS PercentPopulationInfected
+FROM PortfolioProject..CovidDeaths
+WHERE continent IS NOT NULL
+--WHERE location like '%states%'
+GROUP BY location, population
+ORDER BY PercentPopulationInfected DESC
+
+-- Adding date
+SELECT location, population, date, MAX(total_cases) AS HighestInfectionCount, MAX(CAST(total_cases AS float)/CAST(population AS float))*100 AS PercentPopulationInfected
+FROM PortfolioProject..CovidDeaths
+WHERE continent IS NOT NULL AND date <= Convert(datetime, '2021-04-30')
+--WHERE location like '%states%'
+GROUP BY location, population, date
+ORDER BY PercentPopulationInfected DESC
 
 -- Showing countries with Highest Death Count per Population
 
-Select location, MAX(cast(total_deaths as int)) as TotalDeathCount
-From PortfolioProject..CovidDeaths
-Where continent is not null
+SELECT location, MAX(cast(total_deaths AS int)) AS TotalDeathCount
+FROM PortfolioProject..CovidDeaths
+WHERE continent IS NOT NULL
 Group by location
-order by TotalDeathCount desc
+ORDER BY TotalDeathCount DESC
 
 -- LET'S BREAK THINGS DOWN BY CONTINENT
 
 -- Showing continents with the highest death count per population
 
-Select location, MAX(cast(total_deaths as int)) as TotalDeathCount
-From PortfolioProject..CovidDeaths
-Where continent is null
-Group by location
-order by TotalDeathCount desc
+SELECT location, MAX(CAST(total_deaths AS INT)) AS TotalDeathCount
+FROM PortfolioProject..CovidDeaths
+WHERE continent IS NULL
+   AND location NOT IN ('World', 'High income', 'Upper middle income', 'Lower middle income', 'European Union', 'Low income')
+GROUP BY location
+ORDER BY TotalDeathCount DESC
 
 -- GLOBAL NUMBERS
 
 -- Showing total cases, deaths and death percentage by day
 
-SELECT date, SUM(new_cases) as total_cases, SUM(cast(new_deaths as int)) as total_deaths, SUM(cast(new_deaths as float))/SUM(cast(new_cases as int))*100 as DeathPercentage--total_cases, total_deaths, (CAST(total_deaths AS float)/CAST(total_cases AS float))*100 as DeathPercentage
+SELECT date, SUM(new_cases) AS total_cases, SUM(cast(new_deaths AS int)) AS total_deaths, SUM(cast(new_deaths AS float))/SUM(cast(new_cases AS int))*100 AS DeathPercentage--total_cases, total_deaths, (CAST(total_deaths AS float)/CAST(total_cases AS float))*100 as DeathPercentage
 FROM PortfolioProject..CovidDeaths
---Where location like '%states%' AND
-WHERE continent is not null
+--WHERE location like '%states%' AND
+WHERE continent IS NOT NULL
 GROUP BY date
 ORDER BY 1,2
 
@@ -73,7 +82,7 @@ ORDER BY 1,2
 
 SELECT SUM(new_cases) AS total_cases, SUM(CONVERT(int,new_deaths)) AS total_deaths, SUM(cast(new_deaths AS float))/SUM(cast(new_cases AS int))*100 AS DeathPercentage
 FROM PortfolioProject..CovidDeaths
---Where location like '%states%' AND
+--WHERE location like '%states%' AND
 WHERE continent IS NOT NULL
 --Group By date
 ORDER BY 1,2
