@@ -151,3 +151,42 @@ INNER JOIN b10
     ON acc.W = b10.W
 INNER JOIN cbb23
     ON b10.EFG_O = cbb23.EFG_O
+
+-- this will only keep the top 3 teams by wins
+
+SELECT TOP 3 *
+FROM cbb23
+ORDER BY W DESC
+
+-- HAVING comes after GROUP BY to filter
+
+SELECT TEAM, AVG(W)
+FROM cbb23
+GROUP BY TEAM
+HAVING AVG(W) > 20
+
+-- HAVING only works on aggregated functions after GROUP BY
+-- the LIKE function will filter to all teams who made it to the round of 64 with wins greater than 20
+
+SELECT TEAM, AVG(W)
+FROM cbb23
+WHERE POSTSEASON LIKE '%R64'
+GROUP BY TEAM
+HAVING AVG(W) > 20
+
+-- window function similar to GROUP BY but with every person
+-- advantage of a window function: allows you to see other pieces of data
+-- you can use ORDER BY in the window function to create a rolling total
+
+SELECT TEAM, CONF, W,
+SUM(W) OVER(PARTITION BY CONF ORDER BY TEAM) AS Rolling_Total
+FROM cbb23
+
+-- ROW_NUMBER, RANK, and DENSE_RANK are all similar
+-- here we partitition by the conference and order by wins and assign each a row number, rank or dense rank
+
+SELECT TEAM, CONF, W,
+ROW_NUMBER() OVER(PARTITION BY CONF ORDER BY W DESC) AS row_num,
+RANK() OVER(PARTITION BY CONF ORDER BY W DESC) AS rank_num,
+DENSE_RANK() OVER(PARTITION BY CONF ORDER BY W DESC) AS dense_rank_num
+FROM cbb23

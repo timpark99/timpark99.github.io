@@ -161,3 +161,46 @@ INNER JOIN employee_salary AS sal
     ON dem.employee_id = sal.employee_id
 INNER JOIN parks_departments pd
     ON sal.dept_id = pd.department_id
+
+-- this will only keep the top 3 oldest from the table
+
+SELECT TOP 3 *
+FROM employee_demographics
+ORDER BY age DESC
+
+-- HAVING comes after GROUP BY to filter
+
+SELECT gender, AVG(age)
+FROM employee_demographics
+GROUP BY gender
+HAVING AVG(age) > 40
+
+-- HAVING only works on aggregated functions after GROUP BY
+-- the LIKE function will filter to all occupations with the word 'manager'
+
+SELECT occupation, AVG(salary)
+FROM employee_salary
+WHERE occupation LIKE '%manager'
+GROUP BY occupation
+HAVING AVG(salary) > 75000
+
+-- window function similar to GROUP BY but with every person
+-- advantage of a window function: allows you to see other pieces of data
+-- you can use ORDER BY in the window function to create a rolling total
+
+SELECT dem.employee_id, dem.first_name, dem.last_name, gender, salary,
+SUM(salary) OVER(PARTITION BY gender ORDER BY dem.employee_id) AS Rolling_Total
+FROM employee_demographics dem
+JOIN employee_salary sal
+    ON dem.employee_id = sal.employee_id
+
+-- ROW_NUMBER, RANK, and DENSE_RANK are all similar
+-- here we partitition by the gender and order by salary and assign each a row number, rank or dense rank
+
+SELECT dem.employee_id, dem.first_name, dem.last_name, gender, salary,
+ROW_NUMBER() OVER(PARTITION BY gender ORDER BY salary DESC) AS row_num,
+RANK() OVER(PARTITION BY gender ORDER BY salary DESC) AS rank_num,
+DENSE_RANK() OVER(PARTITION BY gender ORDER BY salary DESC) AS dense_rank_num
+FROM employee_demographics dem
+JOIN employee_salary sal
+    ON dem.employee_id = sal.employee_id
