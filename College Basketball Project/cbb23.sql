@@ -190,3 +190,45 @@ ROW_NUMBER() OVER(PARTITION BY CONF ORDER BY W DESC) AS row_num,
 RANK() OVER(PARTITION BY CONF ORDER BY W DESC) AS rank_num,
 DENSE_RANK() OVER(PARTITION BY CONF ORDER BY W DESC) AS dense_rank_num
 FROM cbb23
+
+-- CTE stands for common table expression
+-- you can only use a CTE immediately after you create it
+
+WITH CTE_Example AS
+(
+SELECT TEAM, AVG(W) avg_wins, MAX(W) max_wins, MIN(W) min_wins, COUNT(W) count_wins
+FROM b10
+GROUP BY TEAM
+)
+SELECT AVG(avg_wins)
+FROM CTE_Example
+
+-- using multiple CTEs example
+
+WITH CTE_Example AS
+(
+SELECT TEAM, W, _3P_O
+FROM b10
+WHERE W > 10
+),
+CTE_Example2 AS
+(
+SELECT TEAM, W, _3P_O
+FROM acc
+WHERE _3P_O > 34
+)
+SELECT *
+FROM CTE_Example
+JOIN CTE_Example2
+    ON CTE_Example.W = CTE_Example2.W
+
+-- instead of using aliases to title the columns we can put the aliases in the CTE expression
+
+WITH CTE_Example (Team, AVG_WINS, MAX_WINS, MIN_WINS, COUNT_WINS) AS
+(
+SELECT TEAM, AVG(W) avg_wins, MAX(W) max_wins, MIN(W) min_wins, COUNT(W) count_wins
+FROM b10
+GROUP BY TEAM
+)
+SELECT *
+FROM CTE_Example

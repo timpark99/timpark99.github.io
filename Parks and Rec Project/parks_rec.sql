@@ -204,3 +204,49 @@ DENSE_RANK() OVER(PARTITION BY gender ORDER BY salary DESC) AS dense_rank_num
 FROM employee_demographics dem
 JOIN employee_salary sal
     ON dem.employee_id = sal.employee_id
+
+-- CTE stands for common table expression
+-- you can only use a CTE immediately after you create it
+
+WITH CTE_Example AS
+(
+SELECT gender, AVG(salary) avg_salary, MAX(salary) max_salary, MIN(salary) min_salary, COUNT(salary) count_salary
+FROM employee_demographics dem
+JOIN employee_salary sal
+    ON dem.employee_id = sal.employee_id
+GROUP BY gender
+)
+SELECT AVG(avg_salary)
+FROM CTE_Example
+
+-- using multiple CTEs example
+
+WITH CTE_Example AS
+(
+SELECT employee_id, gender, birth_date
+FROM employee_demographics
+WHERE birth_date > '1985-01-01'
+),
+CTE_Example2 AS
+(
+SELECT employee_id, salary
+FROM employee_salary
+WHERE salary > 50000
+)
+SELECT *
+FROM CTE_Example
+JOIN CTE_Example2
+    ON CTE_Example.employee_id = CTE_Example2.employee_id
+
+-- instead of using aliases to title the columns we can put the aliases in the CTE expression
+
+WITH CTE_Example (Gender, AVG_SAL, MAX_SAL, MIN_SAL, COUNT_SAL) AS
+(
+SELECT gender, AVG(salary) avg_salary, MAX(salary) max_salary, MIN(salary) min_salary, COUNT(salary) count_salary
+FROM employee_demographics dem
+JOIN employee_salary sal
+    ON dem.employee_id = sal.employee_id
+GROUP BY gender
+)
+SELECT *
+FROM CTE_Example
