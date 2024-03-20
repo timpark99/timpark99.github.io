@@ -232,3 +232,34 @@ GROUP BY TEAM
 )
 SELECT *
 FROM CTE_Example
+
+-- temp table example
+
+DROP TABLE #temp_table
+CREATE TABLE #temp_table
+(
+first_name varchar(50),
+last_name varchar(50),
+favorite_movie varchar(100)
+)
+
+INSERT INTO #temp_table
+VALUES ('Tim', 'Park', 'Dumb and Dumber')
+
+SELECT *
+FROM #temp_table
+
+-- temp table from employee_salary table
+-- Drop a temporary table called '#over_20_wins'
+-- Drop the table if it already exists
+IF OBJECT_ID('tempDB..#over_20_wins', 'U') IS NOT NULL
+DROP TABLE #over_20_wins
+GO
+ 
+SELECT *
+INTO #over_20_wins
+FROM cbb23
+WHERE W > 20
+
+SELECT *
+FROM #over_20_wins
