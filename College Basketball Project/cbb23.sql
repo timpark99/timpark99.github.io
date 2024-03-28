@@ -263,3 +263,31 @@ WHERE W > 20
 
 SELECT *
 FROM #over_20_wins
+
+-- Create a new stored procedure called 'conf_postseason' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+-- procedures are found in the programmability folder under stored procedures
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'conf_postseason'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.conf_postseason
+GO
+-- Create the stored procedure in the specified schema
+CREATE PROCEDURE dbo.conf_postseason
+    @p_CONF /*parameter name*/ nvarchar(50) /*datatype_for_param1*/ = 0 /*default_value_for_param1*/
+-- add more stored procedure parameters here
+AS
+BEGIN
+    -- body of the stored procedure
+    SELECT POSTSEASON
+    FROM cbb23
+    WHERE CONF = @p_CONF
+END
+GO
+-- execute the stored procedure we just created
+EXECUTE dbo.conf_postseason sec -- input any conference here to see postseason results
+GO

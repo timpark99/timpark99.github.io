@@ -251,8 +251,9 @@ GROUP BY gender
 SELECT *
 FROM CTE_Example
 
--- temp tables
+-- temp table example
 
+DROP TABLE #temp_table
 CREATE TABLE #temp_table
 (
 first_name varchar(50),
@@ -260,5 +261,53 @@ last_name varchar(50),
 favorite_movie varchar(100)
 )
 
+INSERT INTO #temp_table
+VALUES ('Tim', 'Park', 'Dumb and Dumber')
+
 SELECT *
 FROM #temp_table
+
+-- temp table from employee_salary table
+-- Drop a temporary table called '#salary_over_50k'
+-- Drop the table if it already exists
+IF OBJECT_ID('tempDB..#salary_over_50k', 'U') IS NOT NULL
+DROP TABLE #salary_over_50k
+GO
+ 
+SELECT *
+INTO #salary_over_50k
+FROM employee_salary
+WHERE salary >= 50000
+
+SELECT *
+FROM #salary_over_50k
+
+
+-- Create a new stored procedure called 'large_salaries' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+-- procedures are found in the programmability folder under stored procedures
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'large_salaries'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.large_salaries
+GO
+-- Create the stored procedure in the specified schema
+CREATE PROCEDURE dbo.large_salaries
+    @p_employee_id /*parameter name*/ int /*datatype_for_param1*/ = 0 /*default_value_for_param1*/
+-- add more stored procedure parameters here
+AS
+BEGIN
+    -- body of the stored procedure
+    SELECT salary
+    FROM employee_salary
+    WHERE employee_id = @p_employee_id
+END
+GO
+-- execute the stored procedure we just created
+-- this finds Leslie Knope's salary
+EXECUTE dbo.large_salaries 1 -- this is Leslie Knope's employee ID
+GO
