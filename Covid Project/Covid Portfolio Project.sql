@@ -1,23 +1,25 @@
+-- ORDER BY 3,4 will order first by column 3 then column 4 in ascending order
+-- must add WHERE continent IS NOT NULL because in the data, there are points where continent is null but the location is listed as the continent.  To avoid continents listed as locations, add this clause.
 SELECT *
-FROM PortfolioProject..CovidDeaths
+FROM CovidDeaths
 WHERE continent IS NOT NULL
 ORDER BY 3,4
-
-/* SELECT *
-FROM PortfolioProject..CovidVaccinations
-ORDER BY 3,4 */
 
 -- SELECT Data that we are going to be using
 
 SELECT location, date, total_cases, new_cases, total_deaths, population
-FROM PortfolioProject..CovidDeaths
+FROM CovidDeaths
 WHERE continent IS NOT NULL
 ORDER BY 1,2
 
--- Looking at Total Cases vs. Total Deaths
--- Shows likelihood of dying if you contract covid in your country
-SELECT location, date, total_cases, total_deaths, (CAST(total_deaths AS float)/CAST(total_cases AS float))*100 as DeathPercentage
-FROM PortfolioProject..CovidDeaths
+-- looking at Total Cases vs. Total Deaths
+-- shows likelihood of dying if you contract covid in your country
+-- must cast as float in order to get a decimal value
+-- WHERE clause captures United States as location
+-- AS represents an alias
+
+SELECT location, date, total_cases, total_deaths, (CAST(total_deaths AS float)/CAST(total_cases AS float))*100 AS DeathPercentage
+FROM CovidDeaths
 WHERE location like '%states%' AND
     continent IS NOT NULL
 ORDER BY 1,2
@@ -26,32 +28,32 @@ ORDER BY 1,2
 -- Shows what percentage of population got Covid
 
 SELECT location, date, population, total_cases, (CAST(total_cases AS float)/CAST(population AS float))*100 AS PercentPopulationInfected
-FROM PortfolioProject..CovidDeaths
+FROM CovidDeaths
 WHERE location like '%states%' AND
     continent IS NOT NULL
 ORDER BY 1,2
 
 -- Looking at Countries with Highest Infection Rate compared to Population
+-- DESC is highest number first
 
 SELECT location, population, MAX(total_cases) AS HighestInfectionCount, MAX(CAST(total_cases AS float)/CAST(population AS float))*100 AS PercentPopulationInfected
-FROM PortfolioProject..CovidDeaths
+FROM CovidDeaths
 WHERE continent IS NOT NULL
---WHERE location like '%states%'
 GROUP BY location, population
 ORDER BY PercentPopulationInfected DESC
 
 -- Adding date
 SELECT location, population, date, MAX(total_cases) AS HighestInfectionCount, MAX(CAST(total_cases AS float)/CAST(population AS float))*100 AS PercentPopulationInfected
-FROM PortfolioProject..CovidDeaths
+FROM CovidDeaths
 WHERE continent IS NOT NULL AND date <= Convert(datetime, '2021-04-30')
---WHERE location like '%states%'
 GROUP BY location, population, date
 ORDER BY PercentPopulationInfected DESC
 
 -- Showing countries with Highest Death Count per Population
+-- must cast because it's an nvarchar
 
 SELECT location, MAX(cast(total_deaths AS int)) AS TotalDeathCount
-FROM PortfolioProject..CovidDeaths
+FROM CovidDeaths
 WHERE continent IS NOT NULL
 Group by location
 ORDER BY TotalDeathCount DESC
