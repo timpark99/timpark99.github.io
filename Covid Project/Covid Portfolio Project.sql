@@ -43,6 +43,8 @@ GROUP BY location, population
 ORDER BY PercentPopulationInfected DESC
 
 -- Adding date
+-- filter only dates before or equal to 2021-04-30
+
 SELECT location, population, date, MAX(total_cases) AS HighestInfectionCount, MAX(CAST(total_cases AS float)/CAST(population AS float))*100 AS PercentPopulationInfected
 FROM CovidDeaths
 WHERE continent IS NOT NULL AND date <= Convert(datetime, '2021-04-30')
