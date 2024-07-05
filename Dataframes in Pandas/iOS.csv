@@ -1,0 +1,20 @@
+Names,Age,Gender ,Mobile Phone ,Mobile Operating System ,Mobile phone use for education,Mobile phone activities,Helpful for studying,Educational Apps,Daily usages,Performance impact,Usage distraction,Attention span,Useful features,Health Risks,Beneficial subject,Usage symptoms,Symptom frequency,Health precautions,Health rating
+Hammad,21-25,Male,Yes,IOS,Sometimes,All of these,Yes,Educational Videos,4-6 hours,Strongly agree,Not Distracting,No,Camera,Yes,Browsing Material,All of these,Sometimes,None of Above,Excellent
+Waqar,21-25,Male,Yes,IOS,Frequently,All of these,Yes,Educational Videos,> 6 hours,Agree,While Studying,Yes,Internet Access,No,Browsing Material,Sleep disturbance,Sometimes,None of Above,Excellent
+Fatima,21-25,Female,Yes,IOS,Sometimes,All of these,Yes,Study Planner,4-6 hours,Agree,Not Distracting,Yes,Internet Access,No,Reasarch,Sleep disturbance,Sometimes,None of Above,Good
+Wasid,21-25,Male,Yes,IOS,Sometimes,Social Media,Yes,Educational Videos,> 6 hours,Neutral,During Class Lectures,Yes,Internet Access,Yes,Accounting,Anxiety or Stress,Sometimes,Taking Break during prolonged use,Excellent
+Mukhtar,21-25,Male,Yes,IOS,Sometimes,All of these,Yes,Language,4-6 hours,Neutral,While Studying,Yes,Internet Access,No,Browsing Material,Sleep disturbance;Anxiety or Stress,Rarely,None of Above,Good
+Mursaleen,21-25,Male,Yes,IOS,Sometimes,All of these,Yes,Educational Videos,4-6 hours,Agree,While Studying,No,Internet Access,Only Partially,Browsing Material,Anxiety or Stress,Never,Using Blue light filter,Good
+Sohail,21-25,Male,Yes,IOS,Never,Social Media,Yes,Study Planner,> 6 hours,Strongly agree,Not Distracting,Yes,Internet Access,No,Reasarch,All of these,Rarely,Using Blue light filter,Excellent
+Qadir,21-25,Male,Yes,IOS,Frequently,All of these,Yes,Study Planner,2-4 hours,Agree,While Studying,Yes,Internet Access,No,Reasarch,All of these,Rarely,Limiting Screen Time,Good
+Nafees,16-20,Male,Yes,IOS,Frequently,All of these,Yes,Educational Videos,> 6 hours,Neutral,While Studying,Yes,Internet Access,Yes,Reasarch,Sleep disturbance,Frequently,None of Above,Fair
+Assraa,31-35,Male,Yes,IOS,Frequently,All of these,Yes,Productivity Tools,2-4 hours,Strongly disagree,While Studying,Yes,Internet Access,Yes,Browsing Material,All of these,Sometimes,Limiting Screen Time,Good
+Farouk,16-20,Male,Yes,IOS,Sometimes,Social Media,Yes,Language,> 6 hours,Neutral,Not Distracting,No,Internet Access,No,Reasarch,Anxiety or Stress,Never,None of Above,Excellent
+Hashim,26-30,Male,Yes,IOS,Sometimes,Social Media;Web-browsing;Messaging;All of these,Yes,Language,4-6 hours,Agree,During Exams,No,Camera,No,Accounting,Anxiety or Stress,Rarely,Taking Break during prolonged use,Good
+Ibhraim,31-35,Male,Yes,IOS,Sometimes,Social Media,Yes,Language,2-4 hours,Neutral,While Studying,Yes,Notes Taking App,Yes,Accounting,Sleep disturbance,Frequently,Limiting Screen Time,Fair
+Shabir,21-25,Male,Yes,IOS,Sometimes,Social Media;Web-browsing;Messaging;All of these,Yes,Educational Videos,4-6 hours,Agree,Not Distracting,Yes,Internet Access,No,Browsing Material,All of these,Sometimes,None of Above,Excellent;Good
+Arslan,21-25,Male,Yes,IOS,Sometimes,All of these,Yes,Educational Videos,> 6 hours,Agree,During Exams,Yes,Internet Access,Yes,Accounting,Headache,Sometimes,Limiting Screen Time,Excellent;Good
+Malik,21-25,Male,Yes,IOS,Frequently,All of these,Yes,Educational Videos,> 6 hours,Neutral,During Exams,Yes,Internet Access,Only Partially,Reasarch,Sleep disturbance;Anxiety or Stress,Sometimes,Taking Break during prolonged use,Good
+Ehman,21-25,Female,Yes,IOS,Frequently,Social Media;Web-browsing;Messaging;All of these,Yes,Educational Videos,4-6 hours,Neutral,Not Distracting,Yes,Camera,Yes,Reasarch,Headache,Rarely,Taking Break during prolonged use,Fair
+Imran,16-20,Male,Yes,IOS,Sometimes,All of these,Yes,Educational Videos,4-6 hours,Neutral,While Studying,Yes,Internet Access,No,Reasarch,All of these,Sometimes,Limiting Screen Time,Excellent
+Zahoor,21-25,Male,Yes,IOS,Sometimes,All of these,Yes,Educational Videos,> 6 hours,Agree,During Exams,Yes,Internet Access,Yes,Reasarch,Headache,Sometimes,Taking Break during prolonged use,Excellent
