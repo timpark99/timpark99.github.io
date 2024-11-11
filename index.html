@@ -38,6 +38,28 @@
 
 <body>
 
+  <style>
+    #header {
+      background-color: rgba(0, 0, 0, 0.8); /* Black with 80% opacity */
+      color: white;
+      padding: 20px 0;
+    }
+
+    #header h1 a,
+    #header h2,
+    #header .navbar a {
+      color: white;
+    }
+
+    #header .social-links a {
+      color: white;
+    }
+
+    #header .navbar a:hover {
+      color: #ccc; /* Light gray for hover effect */
+    }
+  </style>
+
   <!-- ======= Header ======= -->
   <header id="header">
     <div class="container">
@@ -46,18 +68,17 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
       <h2>Transitioning Army Officer pursuing <span>data analyst</span> opportunities</h2>
-
-      <nav id="navbar" class="navbar">
+      <nav id="navbar" class="navbar" aria-label="Primary navigation">
         <ul>
-          <li><a class="nav-link active" href="#header">Home</a></li>
-          <li><a class="nav-link" href="#about">About</a></li>
-          <li><a class="nav-link" href="#resume">Resume</a></li>
-          <li><a class="nav-link" href="#services">Analyst Tools</a></li>
-          <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link" href="#contact">Contact</a></li>
+          <li><a class="nav-link active" href="#header" aria-label="Home">Home</a></li>
+          <li><a class="nav-link" href="#about" aria-label="About">About</a></li>
+          <li><a class="nav-link" href="#resume" aria-label="Resume">Resume</a></li>
+          <li><a class="nav-link" href="#services" aria-label="Analyst Tools">Analyst Tools</a></li>
+          <li><a class="nav-link" href="#portfolio" aria-label="Portfolio">Portfolio</a></li>
+          <li><a class="nav-link" href="#contact" aria-label="Contact">Contact</a></li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+        <i class="bi bi-list mobile-nav-toggle" aria-hidden="true"></i>
+      </nav>
 
       <div class="social-links">
         <!-- <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a> -->
@@ -66,6 +87,8 @@
 
     </div>
   </header><!-- End Header -->
+  
+  
 
   <!-- ======= About Section ======= -->
   <section id="about" class="about">
@@ -593,13 +616,13 @@
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-r">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-1 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/1.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>R Project</h4>
               <p>Cyclistic Bike-Share Analysis Case Study</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Cyclistic Bike-Share Analysis Case Study"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Cyclistic Bike-Share Analysis Case Study"><i class="bx bx-plus"></i></a>
+                <a href="1.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -607,13 +630,13 @@
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-sql">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-2 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/2.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>SQL Project</h4>
               <p>COVID Project</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-2 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="COVID Project"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 2.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="COVID Project"><i class="bx bx-plus"></i></a>
+                <a href="2.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -621,13 +644,13 @@
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-tableau">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-3 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/3.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>Tableau Project</h4>
               <p>COVID Project in Tableau</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-3 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="COVID Project in Tableau"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 3.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="COVID Project in Tableau"><i class="bx bx-plus"></i></a>
+                <a href="3.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -635,13 +658,13 @@
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-sql">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-4 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/4.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>Data Cleaning Project in SQL</h4>
               <p>Nashville Housing Project</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-4 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nashville Housing Project"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 4.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nashville Housing Project"><i class="bx bx-plus"></i></a>
+                <a href="4.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -649,13 +672,13 @@
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-python">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-5 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/5.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>Python Project</h4>
               <p>Movie Correlation Project</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-5 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Movie Correlation Project"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 5.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Movie Correlation Project"><i class="bx bx-plus"></i></a>
+                <a href="5.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -663,13 +686,13 @@
         
         <div class="col-lg-4 col-md-6 portfolio-item filter-python">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-6 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/6.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>Web Scraping Using Python Project</h4>
               <p>Jimmy Butler Points Per Game Project</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-6 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web Scraping Using Python Project"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 6.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web Scraping Using Python Project"><i class="bx bx-plus"></i></a>
+                <a href="6.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -677,13 +700,13 @@
          
         <div class="col-lg-4 col-md-6 portfolio-item filter-tableau">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-7 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/7.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>Tableau Project</h4>
               <p>Airbnb Project</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-7 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Airbnb Project"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 7.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Airbnb Project"><i class="bx bx-plus"></i></a>
+                <a href="7.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -691,13 +714,13 @@
         
         <div class="col-lg-4 col-md-6 portfolio-item filter-excel">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-8 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/8.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>Excel Project</h4>
               <p>Bike Sales Project</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-8 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Bike Sales Project"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 8.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Bike Sales Project"><i class="bx bx-plus"></i></a>
+                <a href="8.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -705,13 +728,13 @@
         
         <div class="col-lg-4 col-md-6 portfolio-item filter-sql">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-9 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/9.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>SQL Project</h4>
               <p>Parks and Rec Project</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-9 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Parks and Rec Project"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 9.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Parks and Rec Project"><i class="bx bx-plus"></i></a>
+                <a href="9.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -719,13 +742,13 @@
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-sql">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-10 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/10.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>SQL Project</h4>
               <p>College Basketball Project</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-10 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="College Basketball Project"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 10.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/10.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="College Basketball Project"><i class="bx bx-plus"></i></a>
+                <a href="10.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -733,13 +756,13 @@
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-python">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-11 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/11.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>Python Project</h4>
               <p>BMI Calculator Project</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-11 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="BMI Calculator Project"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 11.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/11.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="BMI Calculator Project"><i class="bx bx-plus"></i></a>
+                <a href="11.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -747,13 +770,13 @@
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-python">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-12 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/12.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>Python Project</h4>
               <p>Automatic File Sorter Project</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-12 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Automatic File Sorter Project"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 12.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/12.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Automatic File Sorter Project"><i class="bx bx-plus"></i></a>
+                <a href="12.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -761,13 +784,13 @@
 
         <div class="col-lg-4 col-md-6 portfolio-item filter-python">
           <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-13 v2.jpg" class="img-fluid" alt="">
+            <img src="assets/img/portfolio/13.jpg" class="img-fluid" alt="">
             <div class="portfolio-info">
               <h4>Python Project</h4>
               <p>Regular Expressions Project</p>
               <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-13 v2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Regular Expressions Project"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details 13.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="assets/img/portfolio/13.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Regular Expressions Project"><i class="bx bx-plus"></i></a>
+                <a href="13.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
@@ -1159,7 +1182,7 @@
               <p>Flask 2: HTML Templates</p>
               <div class="portfolio-links">
                 <a href="assets/img/portfolio/portfolio-40.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Flask 2: HTML Templates"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details/41.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                <a href="41.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
               </div>
             </div>
           </div>
