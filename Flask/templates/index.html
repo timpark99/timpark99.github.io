@@ -1,24 +1,20 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Home page</title>
-    </head>
-    <body>
-        <h1>Home Page!</h1>
- 
-        <p>{{content}}</p>
-        <p>{{r}}</p>
-        
-
-        {% for x in range(10) %}
-            {% if x % 2 == 1 %}
-                <p>{{x}}</p>
-            {% endif %}
-        {% endfor %}
-
-        {% for x in fnames %}
-            <p>{{x}}</p>
-        {% endfor %}
-
-    </body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <div>
+        {% block content %}
+        <h1>Home Page</h1>
+        <p>Hello, {{name}}!</p>
+        {% endblock %}
+    </div>
+    <script
+        type="text/javascript"
+        src="{{url_for('static', filename='index.js')}}"
+    ></script>
+</body>
 </html>
