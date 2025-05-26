@@ -1,13 +1,12 @@
-<!-- this is the theme of the website.  maybe a navbar or a footer or a header -->
-<!-- then you will override parts of the base template with more specific templates -->
-
+<!-- this HTML template is a base layout used in Flask with Jinja2 templating and Bootstrap styling. -->
+<!-- it's designed to be extended by other templates using {% extends "base.html" %} -->
+<!-- the purpose is to avoid duplicating HTML across files and it keeps your layout consistent -->
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <!-- defining the character set used for this document -->
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <!-- this takes up the entire width of the screen -->
+    <head>      <!-- head tag is metadata related to the website -->
+        <meta charset="utf-8"/>     <!-- defining the character set used for this document -->
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>   <!-- this takes up the entire width of the screen -->
+        <!-- bootstrap and font awesome are imported via CDN for layout and icons -->
         <link
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -18,10 +17,10 @@
             rel="stylesheet"
             href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
             crossorigin="anonymous"
-        />
-        <title>{% block title %}Home{% endblock %}</title>
+        /> 
+        <title>{% block title %}Home{% endblock %}</title>  <!--the page title is dynamic.  Other templates can override it with {% block title %}-->
     </head>
-    <!-- head tag is metadata related to the website -->
+    
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <button 
@@ -34,7 +33,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar">
                 <div class="navbar-nav">
-                    {% if user.is_authenticated %}
+                     <!--shows different links depending on whether the user is logged in-->
+                    {% if user.is_authenticated %}  <!--user.is_authenticated is available when using Flask-Login or similar user management-->
                     <a class="nav-item nav-link" id="home" href="/">Home</a>
                     <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                     {% else %}
@@ -45,33 +45,38 @@
             </div>
         </nav>
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-            {% if category == 'error' %}
-            <div class ="alert alert-danger alert-dismissable fade show" role="alert">
-                {{message}}
-                <button type="button" class="close" data-dismiss="alert">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {% else %}
-            <div class ="alert alert-success alert-dismissable fade show" role="alert">
-                {{message}}
-                <button type="button" class="close" data-dismiss="alert">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+        <!-- displays success or error messages (e.g., after submitting a form or logging in) -->
+        <!-- uses bootstrap alert boxes that can be closed by users -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        <div class ="alert alert-danger alert-dismissable fade show" role="alert">
+                            {{message}}
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% else %}
+                        <div class ="alert alert-success alert-dismissable fade show" role="alert">
+                            {{message}}
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             {% endif %}
-            {% endfor %}
-        {% endif %}
         {% endwith %}
 
+        <!-- this is where specific page content gets injected -->
+        <!-- ex. a file like home.html would use {% block content %} to insert its note-taking form here -->
         <div class="container">
             {% block content %}
             {% endblock %}
         </div>
 
+        <!-- enables interactive components like dropdowns, modals, or alerts in Bootstrap -->
         <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -87,6 +92,7 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"
         ></script>
+        <!-- index.js is your custom JavaScript file located in the static folder -->
         <script
             type="text/javascript"
             src="{{url_for('static', filename='index.js')}}"

@@ -55,10 +55,10 @@ def sign_up():
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
         else:
-            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='pbkdf2:sha256'))        # User is from model.py file; sha256 is a hashing algorithm
+            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'))        # User is from model.py file; sha256 is a hashing algorithm
             db.session.add(new_user)    # add user to database
             db.session.commit()# update database
-            login_user(user, remember=True)     # they should be logged in after they sign up
+            login_user(new_user, remember=True)     # they should be logged in after they sign up
             flash('Account created!', category='success')
             return redirect(url_for('views.home'))  # redirect user to home page of the website
 
