@@ -3,4 +3,5 @@ head(df)
 str(df)
 summary(df)
 df2 <- read.csv('/Users/timothypark/Documents/portfolios/timpark99.github.io/r/reading and writing in r/patients.csv', header = TRUE, sep = ",")
-
+write.csv(df2, '/Users/timothypark/Documents/portfolios/timpark99.github.io/r/reading and writing in r/patients_output.csv', row.names = FALSE)
+df3 <- read.csv('/Users/timothypark/Documents/portfolios/timpark99.github.io/r/reading and writing in r/patients_output.csv', header = TRUE, sep = ",")
