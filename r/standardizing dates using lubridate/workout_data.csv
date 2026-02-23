@@ -1,0 +1,15 @@
+member_id,visit_date,age,gender,membership_type,workout_type,workout_duration_minutes,calories_burned,check_in_time
+1,2024-10-11,64,Female,Annual,HIIT,28,171,20:04
+2,06/01/2024,65,Female,Quarterly,Strength Training,72,650,19:17
+3,2024-06-13,45,Male,Quarterly,Cardio,NA,633,7:24
+4,"February 5, 2024",35,,Monthly,CrossFit,64,362,7:18
+5,2024-07-13,26,Female,Quarterly,Yoga,31,262,11:22
+6,09-11-2024,45,Male,Quarterly,Cardio,63,518,20:08
+7,2024/02/22,30,Female,Quarterly,CrossFit,50,404,18:17
+8,15-04-2024,38,Male,Annual,,99,959,21:59
+9,02/10/2024,61,Female,Monthly,CrossFit,NA,289,9:39
+10,"August 14, 2024",36,Male,Quarterly,Strength Training,94,643,11:29
+11,2024-10-11,60,Female,Monthly,Strength Training,110,738,22:43
+12,12-25-2024,26,Female,Monthly,HIIT,86,547,8:17
+13,06-28-2024,48,Female,Quarterly,HIIT,44,389,19:08
+14,12-01-2024,54,Male,Annual,Yoga,99,644,14:45

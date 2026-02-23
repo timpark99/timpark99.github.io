@@ -1,0 +1,15 @@
+member_id,visit_date,age,gender,membership_type,workout_type,workout_duration_minutes,calories_burned,check_in_time
+1,10/11/24,64,Female,Annual,HIIT,28,171,20:04
+2,6/1/24,65,Female,Quarterly,Strength Training,72,650,19:17
+3,6/13/24,45,Male,Quarterly,Cardio,NA,633,7:24
+4,2/5/24,35,,Monthly,CrossFit,64,362,7:18
+5,7/13/24,26,Female,Quarterly,Yoga,31,262,11:22
+6,9/11/24,45,Male,Quarterly,Cardio,63,518,20:08
+7,2/22/24,30,Female,Quarterly,CrossFit,50,404,18:17
+8,5/4/24,38,Male,Annual,,99,959,21:59
+9,2/10/24,61,Female,Monthly,CrossFit,NA,289,9:39
+10,8/14/24,36,Male,Quarterly,Strength Training,94,643,11:29
+11,10/11/24,60,Female,Monthly,Strength Training,110,738,22:43
+12,12/25/24,26,Female,Monthly,HIIT,86,547,8:17
+13,6/28/24,48,Female,Quarterly,HIIT,44,389,19:08
+14,12/1/24,54,Male,Annual,Yoga,99,644,14:45
